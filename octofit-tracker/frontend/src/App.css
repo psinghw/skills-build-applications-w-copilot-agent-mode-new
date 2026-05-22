@@ -1,0 +1,72 @@
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  background: radial-gradient(circle at top, #1f2937, #0f172a 60%);
+}
+
+.hero-card {
+  width: min(720px, 100%);
+  padding: 3rem;
+  border-radius: 24px;
+  background: rgba(17, 24, 39, 0.88);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.45);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #60a5fa;
+  font-size: 0.8rem;
+  margin-bottom: 0.75rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.05;
+}
+
+.description {
+  margin: 1.25rem 0 2rem;
+  max-width: 55ch;
+  color: #cbd5e1;
+  font-size: 1.05rem;
+}
+
+.port-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.port-grid div {
+  padding: 1rem;
+  border-radius: 16px;
+  background: rgba(30, 41, 59, 0.85);
+  border: 1px solid rgba(96, 165, 250, 0.18);
+}
+
+.port-grid span {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #93c5fd;
+  margin-bottom: 0.25rem;
+}
+
+.port-grid strong {
+  font-size: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .hero-card {
+    padding: 2rem;
+  }
+
+  .port-grid {
+    grid-template-columns: 1fr;
+  }
+}
