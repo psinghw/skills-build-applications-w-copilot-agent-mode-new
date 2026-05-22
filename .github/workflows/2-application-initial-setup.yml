@@ -61,6 +61,20 @@ jobs:
 
       # START: Check practical exercise
 
+      - name: Debug - Show package.json content
+        run: |
+          echo "=== Checking package.json content ==="
+          cat octofit-tracker/frontend/package.json
+          echo ""
+          echo "=== Line with react dependency ==="
+          grep -n "react" octofit-tracker/frontend/package.json | head -1
+          echo ""
+          echo "=== Searching for pattern without quotes ==="
+          grep -F 'react": "^19.0.0' octofit-tracker/frontend/package.json || echo "NOT FOUND"
+          echo ""
+          echo "=== Searching for pattern with quotes ==="
+          grep -F '"react": "^19.0.0' octofit-tracker/frontend/package.json || echo "NOT FOUND"
+
       - name: Check React 19 dependency
         id: check-react-19
         continue-on-error: true
