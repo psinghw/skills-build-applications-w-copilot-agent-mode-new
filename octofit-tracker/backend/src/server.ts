@@ -8,7 +8,7 @@ const PORT = 8000
 const HOST = '0.0.0.0'
 const codespaceName = process.env.CODESPACE_NAME
 const apiBaseUrl = codespaceName
-  ? `https://${codespaceName}-${PORT}.app.github.dev`
+  ? `https://${codespaceName}-8000.app.github.dev`
   : `http://localhost:${PORT}`
 
 app.use(express.json())
