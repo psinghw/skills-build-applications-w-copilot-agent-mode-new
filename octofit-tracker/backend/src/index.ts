@@ -1,20 +1,8 @@
-import express from 'express'
 import mongoose from 'mongoose'
+import app from './app.js'
 
-const app = express()
 const PORT = 8000
 const MONGODB_URI = process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/octofit-tracker'
-
-app.use(express.json())
-
-app.get('/api/health', (_req, res) => {
-  res.json({
-    status: 'ok',
-    service: 'octofit-tracker-backend',
-    port: PORT,
-    mongodb: MONGODB_URI,
-  })
-})
 
 const start = async () => {
   try {
