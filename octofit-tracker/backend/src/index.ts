@@ -1,11 +1,10 @@
 import express from 'express'
 import type { ErrorRequestHandler, RequestHandler } from 'express'
-import mongoose from 'mongoose'
+import { connectDatabase, MONGODB_URI } from './config/database.js'
 import { Activity, LeaderboardEntry, Team, User, Workout } from './models/index.js'
 
 const app = express()
 const PORT = 8000
-const MONGODB_URI = process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/octofit_db'
 const codespaceName = process.env.CODESPACE_NAME
 const apiBaseUrl = codespaceName
   ? `https://${codespaceName}-${PORT}.app.github.dev`
@@ -65,7 +64,7 @@ app.use(errorHandler)
 
 const start = async () => {
   try {
-    await mongoose.connect(MONGODB_URI)
+    await connectDatabase()
     console.log(`Connected to MongoDB at ${MONGODB_URI}`)
 
     app.listen(PORT, () => {
