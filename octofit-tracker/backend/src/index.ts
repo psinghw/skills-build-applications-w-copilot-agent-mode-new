@@ -5,6 +5,7 @@ import { Activity, LeaderboardEntry, Team, User, Workout } from './models/index.
 
 const app = express()
 const PORT = 8000
+const HOST = '0.0.0.0'
 const codespaceName = process.env.CODESPACE_NAME
 const apiBaseUrl = codespaceName
   ? `https://${codespaceName}-${PORT}.app.github.dev`
@@ -25,6 +26,7 @@ app.get('/api/health', (_req, res) => {
     status: 'ok',
     service: 'octofit-tracker-backend',
     port: PORT,
+    host: HOST,
     apiBaseUrl,
     mongodb: MONGODB_URI,
   })
@@ -67,7 +69,7 @@ const start = async () => {
     await connectDatabase()
     console.log(`Connected to MongoDB at ${MONGODB_URI}`)
 
-    app.listen(PORT, () => {
+    app.listen(PORT, HOST, () => {
       console.log(`OctoFit backend listening on ${apiBaseUrl}`)
     })
   } catch (error) {
