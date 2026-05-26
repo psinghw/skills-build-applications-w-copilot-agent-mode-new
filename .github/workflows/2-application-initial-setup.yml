@@ -32,7 +32,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-
+        with:
+          ref: ${{ github.ref_name }}
+          
       - name: Get response templates
         uses: actions/checkout@v6
         with:
@@ -62,32 +64,43 @@ jobs:
       - name: Check React 19 dependency
         id: check-react-19
         continue-on-error: true
-        uses: skills/action-keyphrase-checker@v2.0.0
-        with:
-          text-file: octofit-tracker/frontend/package.json
-          keyphrase: '"react": "^19'
-          minimum-occurrences: 1
-          case-sensitive: false
+        run: |
+          echo "Checking for React 19 in package.json..."
+          cat octofit-tracker/frontend/package.json
+          echo ""
+          if grep -q '"react".*"^19' octofit-tracker/frontend/package.json; then
+            echo "✅ Found React 19 dependency"
+            exit 0
+          else
+            echo "❌ React 19 dependency not found"
+            exit 1
+          fi
 
       - name: Check Express dependency
         id: check-express
         continue-on-error: true
-        uses: skills/action-keyphrase-checker@v2.0.0
-        with:
-          text-file: octofit-tracker/backend/package.json
-          keyphrase: '"express"'
-          minimum-occurrences: 1
-          case-sensitive: false
+        run: |
+          echo "Checking for Express in backend package.json..."
+          if grep -q '"express"' octofit-tracker/backend/package.json; then
+            echo "✅ Found Express dependency"
+            exit 0
+          else
+            echo "❌ Express dependency not found"
+            exit 1
+          fi
 
       - name: Check Mongoose dependency
         id: check-mongoose
         continue-on-error: true
-        uses: skills/action-keyphrase-checker@v2.0.0
-        with:
-          text-file: octofit-tracker/backend/package.json
-          keyphrase: '"mongoose"'
-          minimum-occurrences: 1
-          case-sensitive: false
+        run: |
+          echo "Checking for Mongoose in backend package.json..."
+          if grep -q '"mongoose"' octofit-tracker/backend/package.json; then
+            echo "✅ Found Mongoose dependency"
+            exit 0
+          else
+            echo "❌ Mongoose dependency not found"
+            exit 1
+          fi
 
       - name: Update comment - step results
         uses: GrantBirki/comment@v2.1.1
@@ -124,7 +137,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-
+        with:
+          ref: ${{ github.ref_name }}
+          
       - name: Get response templates
         uses: actions/checkout@v6
         with:
